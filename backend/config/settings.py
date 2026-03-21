@@ -29,6 +29,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+USE_I18N = True
+
+LANGUAGE_CODE = 'en'  # default
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('fr', 'Français'),
+    ('ar', 'العربية'),
+]
 
 # Application definition
 
@@ -56,10 +65,11 @@ TINYMCE_DEFAULT_CONFIG = {
         "advlist", "autolink", "lists", "link", "charmap",
         "preview", "anchor", "searchreplace", "visualblocks",
         "code", "fullscreen", "insertdatetime", "table",
-        "wordcount"
+        "wordcount", "directionality",
     ],
     "toolbar": (
         "undo redo | blocks | bold italic underline strikethrough | "
+        "rtl ltr | "
         "alignleft aligncenter alignright alignjustify | "
         "bullist numlist outdent indent | link | "
         "removeformat | code fullscreen"
@@ -97,6 +107,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     "simple_history.middleware.HistoryRequestMiddleware",
 ]
 

@@ -72,7 +72,7 @@ class CompanyQualityAdmin(SimpleHistoryAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(SimpleHistoryAdmin):
-    list_display        = ("logo_preview", "name_en", "website", "is_active")
+    list_display        = ("logo_preview", "name_en", "website", "is_active","is_main")
     list_filter         = ("is_active", "domains", "qualities")
     search_fields       = ("name_en", "name_fr", "name_ar")
     filter_horizontal   = ("domains", "qualities", "partners")
@@ -96,7 +96,7 @@ class CompanyAdmin(SimpleHistoryAdmin):
             "fields": ("name_ar", "description_ar")
         }),
         ("Details", {
-            "fields": ("logo_preview", "logo", "website", "is_active")
+            "fields": ("logo_preview", "logo", "website", "is_active","is_main")
         }),
         ("Relations", {
             "fields": ("domains", "qualities", "partners")

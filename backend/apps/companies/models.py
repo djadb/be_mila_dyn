@@ -3,6 +3,7 @@ from simple_history.models import HistoricalRecords
 from apps.media.models import Image
 #from django_ckeditor_5.fields import CKEditor5Field
 from tinymce.models import HTMLField
+from django.utils.translation import gettext_lazy as _
 
 class DomainActivity(models.Model):
     name_en        = models.CharField(max_length=50)
@@ -61,6 +62,7 @@ class Company(models.Model):
     )
     website        = models.TextField(blank=True, null=True)
     is_active      = models.BooleanField(default=True)
+    is_main       = models.BooleanField(default=False)
 
     domains    = models.ManyToManyField(
         DomainActivity,
