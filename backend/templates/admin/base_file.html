@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        {% trans "Administration" %}
+    </a>
+</div>
+
+<!-- Language switcher -->
+<div style="float:right; padding: 10px; display:flex; gap:8px; align-items:center;">
+    <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+        <select name="language" onchange="this.form.submit()"
+            style="padding:4px 8px; border-radius:4px; border:1px solid #ccc; cursor:pointer;">
+            <option value="en" {% if request.LANGUAGE_CODE == "en" %}selected{% endif %}>🇬🇧 English</option>
+            <option value="fr" {% if request.LANGUAGE_CODE == "fr" %}selected{% endif %}>🇫🇷 Français</option>
+            <option value="ar" {% if request.LANGUAGE_CODE == "ar" %}selected{% endif %}>🇩🇿 العربية</option>
+        </select>
+    </form>
+</div>
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+{% if request.LANGUAGE_CODE == "ar" %}
+<style>
+    /* RTL layout for Arabic admin */
+    body { direction: rtl; }
+    #header { direction: rtl; }
+    .breadcrumbs { direction: rtl; }
+    #nav-sidebar { right: 0; left: auto; }
+    #main { margin-right: 250px; margin-left: 0; }
+    .submit-row { direction: rtl; }
+    th { text-align: right; }
+</style>
+{% endif %}
+{% endblock %}

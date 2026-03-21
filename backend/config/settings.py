@@ -16,6 +16,7 @@ import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 env = environ.Env()
 environ.Env.read_env(BASE_DIR / '.env')
 # Quick-start development settings - unsuitable for production
@@ -30,6 +31,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 USE_I18N = True
+USE_L10N = True
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",]
 
 LANGUAGE_CODE = 'en'  # default
 
@@ -56,6 +61,7 @@ INSTALLED_APPS = [
     "apps.media",
     "django_ckeditor_5",
     "tinymce",
+    'corsheaders',
 ]
 
 TINYMCE_DEFAULT_CONFIG = {
@@ -100,6 +106,7 @@ CKEDITOR_5_CONFIGS = {
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff" 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,12 +118,15 @@ MIDDLEWARE = [
     "simple_history.middleware.HistoryRequestMiddleware",
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True  # dev only
+# CORS_ALLOWED_ORIGINS = ['https://be-mila.dz']  # production
+
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,8 +135,10 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
         },
+        
     },
 ]
+
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
