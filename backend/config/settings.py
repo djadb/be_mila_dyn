@@ -42,7 +42,34 @@ INSTALLED_APPS = [
     'rest_framework',
     "simple_history",
     "apps.users",
+    "apps.projects",
+    "apps.companies",
+    "apps.media",
+    "django_ckeditor_5",
 ]
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "toolbar": [
+            "heading", "|",
+            "bold", "italic", "underline", "strikethrough", "|",
+            "bulletedList", "numberedList", "|",
+            "blockQuote", "link", "|",
+            "alignment", "|",
+            "undo", "redo"
+        ],
+        "heading": {
+            "options": [
+                {"model": "paragraph", "title": "Paragraph", "class": "ck-heading_paragraph"},
+                {"model": "heading1", "title": "Heading 1", "class": "ck-heading_heading1"},
+                {"model": "heading2", "title": "Heading 2", "class": "ck-heading_heading2"},
+                {"model": "heading3", "title": "Heading 3", "class": "ck-heading_heading3"},
+            ]
+        },
+    }
+}
+
+CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

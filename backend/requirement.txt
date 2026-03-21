@@ -9,3 +9,5 @@ django-simple-history>=3.0,<4.0
 django-allauth>=0.59,<1.0
 django-rest-auth>=0.9.5,<1.0
 gunicorn>=21.2,<22.0
+Pillow
+django-ckeditor-5
