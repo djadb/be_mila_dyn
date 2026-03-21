@@ -46,7 +46,25 @@ INSTALLED_APPS = [
     "apps.companies",
     "apps.media",
     "django_ckeditor_5",
+    "tinymce",
 ]
+
+TINYMCE_DEFAULT_CONFIG = {
+    "height": 300,
+    "menubar": True,
+    "plugins": [
+        "advlist", "autolink", "lists", "link", "charmap",
+        "preview", "anchor", "searchreplace", "visualblocks",
+        "code", "fullscreen", "insertdatetime", "table",
+        "wordcount"
+    ],
+    "toolbar": (
+        "undo redo | blocks | bold italic underline strikethrough | "
+        "alignleft aligncenter alignright alignjustify | "
+        "bullist numlist outdent indent | link | "
+        "removeformat | code fullscreen"
+    ),
+}
 
 CKEDITOR_5_CONFIGS = {
     "default": {

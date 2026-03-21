@@ -15,6 +15,5 @@ To enable arabic before creating database excute those two comands:
     - sudo update-locale
 
 
-To test users in admin panel:
+To create first user:
 - python manage.py createsuperuser
-- 

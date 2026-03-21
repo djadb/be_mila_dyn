@@ -1,6 +1,7 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
-from django_ckeditor_5.fields import CKEditor5Field
+#from django_ckeditor_5.fields import CKEditor5Field
+from tinymce.models import HTMLField
 
 
 class ProjectStatus(models.Model):
@@ -20,9 +21,9 @@ class Project(models.Model):
     title_en       = models.CharField(max_length=50)
     title_fr       = models.CharField(max_length=50)
     title_ar       = models.CharField(max_length=50)
-    description_en = CKEditor5Field(blank=True, null=True, config_name="default") 
-    description_fr = CKEditor5Field(blank=True, null=True, config_name="default") 
-    description_ar = CKEditor5Field(blank=True, null=True, config_name="default") 
+    description_en = HTMLField(blank=True, null=True)
+    description_fr = HTMLField(blank=True, null=True)
+    description_ar = HTMLField(blank=True, null=True)
     start_date     = models.DateTimeField(blank=True, null=True)
     estimated_date = models.DateTimeField(blank=True, null=True)
     end_date       = models.DateTimeField(blank=True, null=True)

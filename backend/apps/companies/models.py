@@ -1,8 +1,8 @@
 from django.db import models
 from simple_history.models import HistoricalRecords
 from apps.media.models import Image
-from django_ckeditor_5.fields import CKEditor5Field
-
+#from django_ckeditor_5.fields import CKEditor5Field
+from tinymce.models import HTMLField
 
 class DomainActivity(models.Model):
     name_en        = models.CharField(max_length=50)
@@ -50,9 +50,9 @@ class Company(models.Model):
     name_en        = models.TextField()
     name_fr        = models.TextField(blank=True, null=True)
     name_ar        = models.TextField(blank=True, null=True)
-    description_en = CKEditor5Field(blank=True, null=True, config_name="default")
-    description_fr = CKEditor5Field(blank=True, null=True, config_name="default")
-    description_ar = CKEditor5Field(blank=True, null=True, config_name="default")
+    description_en = HTMLField(blank=True, null=True)
+    description_fr = HTMLField(blank=True, null=True)
+    description_ar = HTMLField(blank=True, null=True)
     logo           = models.ForeignKey(         
         Image,
         on_delete=models.SET_NULL,
