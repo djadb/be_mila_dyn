@@ -1,0 +1,20 @@
+- Example of permissions :
+    INSERT INTO permissions (id, name, resource, action) VALUES
+    (uuid(), 'project:create', 'project', 'create'),
+    (uuid(), 'project:view',   'project', 'view'),
+    (uuid(), 'project:update', 'project', 'update'),
+    (uuid(), 'proposal:submit','proposal','submit'),
+    (uuid(), 'proposal:approve','proposal','approve');
+- NB : The above permissions model has a problem we cannot assign users to specific projects (not our use case anyway)
+- NB : Instead of Audit_log table i am using update tables just to maintain connection between the user and other entities
+- NB : The database design for users is good but since django built it already so basically we will not use this schema
+- NB : Instead of tracking modeled in schema we can use django-simple-history
+
+To enable arabic before creating database excute those two comands:
+    - sudo locale-gen ar_SA.UTF-8
+    - sudo update-locale
+
+
+To test users in admin panel:
+- python manage.py createsuperuser
+- 
