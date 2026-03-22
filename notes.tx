@@ -17,3 +17,15 @@ To enable arabic before creating database excute those two comands:
 
 To create first user:
 - python manage.py createsuperuser
+
+
+Remaining Work :
+
+    - Projects Page.
+    - Project details page.
+    - Contact Page.
+    - About page.
+    - Home page :
+        - Fix Arabic.
+        - Images and squares should be same size.
+        - Make langauge switcher a sliding menu.
