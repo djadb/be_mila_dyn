@@ -125,29 +125,32 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-md-9 col-sm-9 col-xs-8">
-                                    <nav class="congat_menu nologo_menu13 main-search-menu">
+                            <div class="col-md-9 col-sm-9 col-xs-8">
+                            <nav class="congat_menu nologo_menu13 main-search-menu">
+                                <ul class="sub-menu">
+                                    <li><a href="index.html"        data-t="home">Accueil</a></li>
+                                    <li><a href="about.html"        data-t="presentation">Présentation</a></li>
+                                    <li><a href="project.html"      data-t="projects">Nos Projets</a></li>
+                                    <li><a href="contact.html"      data-t="contact">Contact</a></li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#" data-t="language">Langue</a>
                                         <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#" data-t="home">Home</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="index.html" data-t="home">Home</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="about.html" data-t="about">About</a></li>
-                                            <li><a href="project.html" data-t="projects">Project</a></li>
-                                            <li><a href="contact.html" data-t="contact">Contact</a></li>
+                                            <li><a href="#" onclick="setLang('fr'); return false;">Français</a></li>
+                                            <li><a href="#" onclick="setLang('en'); return false;">English</a></li>
+                                            <li><a href="#" onclick="setLang('ar'); return false;">العربية</a></li>
                                         </ul>
-                                        <div class="tx_right_otherx d-flex align-items-center">
-                                            <!-- language switcher — replaces static /en/ /ar/ /fr/ links -->
-                                            <div class="donate-btn-header lang-selector">
-                                                <a href="#" class="lang-link" data-lang="en" onclick="setLang('en');return false;">EN</a>
-                                                <a href="#" class="lang-link" data-lang="ar" onclick="setLang('ar');return false;">AR</a>
-                                                <a href="#" class="lang-link" data-lang="fr" onclick="setLang('fr');return false;">FR</a>
-                                            </div>
-                                        </div>
-                                    </nav>
+                                    </li>
+                                </ul>
+                               <!-- <div class="tx_right_otherx d-flex align-items-center">
+                                    <div class="donate-btn-header lang-selector">
+                                        <a href="#" class="lang-link" data-lang="fr" onclick="setLang('fr'); return false;">FR</a>
+                                        <a href="#" class="lang-link" data-lang="en" onclick="setLang('en'); return false;">EN</a>
+                                        <a href="#" class="lang-link" data-lang="ar" onclick="setLang('ar'); return false;">AR</a>
+                                    </div>
                                 </div>
+                               -->
+                            </nav>
+                        </div>
                             </div>
                         </div>
                     </div>
@@ -190,11 +193,11 @@
                                                     <li><a href="project.html" data-t="projects">Project</a></li>
                                                     <li><a href="contact.html" data-t="contact">Contact</a></li>
                                                     <li class="menu-item-has-children">
-                                                        <a href="#" data-t="language">Language</a>
+                                                        <a href="#" data-t="language">Langue</a>
                                                         <ul class="sub-menu">
-                                                            <li><a href="#" onclick="setLang('en');return false;">English</a></li>
-                                                            <li><a href="#" onclick="setLang('ar');return false;">العربية</a></li>
-                                                            <li><a href="#" onclick="setLang('fr');return false;">Français</a></li>
+                                                            <li><a href="#" onclick="setLang('fr'); return false;">Français</a></li>
+                                                            <li><a href="#" onclick="setLang('en'); return false;">English</a></li>
+                                                            <li><a href="#" onclick="setLang('ar'); return false;">العربية</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>

@@ -21,7 +21,8 @@ To create first user:
 
 Remaining Work :
 
-    - Projects Page.
+    - Projects Page : 
+        - Make settings of project.html in separate file
     - Project details page.
     - Contact Page.
     - About page.
