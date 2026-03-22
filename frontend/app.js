@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
 // ─── LANGUAGE ────────────────────────────────────────────────────
 
 function applyLang() {
-    const lang  = getLang();
+    const lang = getLang();
     const isRTL = lang === "ar";
     document.documentElement.lang = lang;
-    document.documentElement.dir  = isRTL ? "rtl" : "ltr";
+    document.documentElement.dir = isRTL ? "rtl" : "ltr";
     document.body.classList.toggle("rtl", isRTL);
     document.querySelectorAll(".lang-link").forEach(el => {
         el.classList.toggle("active", el.dataset.lang === lang);
@@ -62,7 +62,7 @@ async function loadCompany() {
         if (company.qualities?.length) {
             renderQualities(company.qualities);
         }
-        if (company.domains?.length)   {renderDomains(company.domains);} 
+        if (company.domains?.length) { renderDomains(company.domains); }
 
         // ── Footer contact info
         renderFooterContact(company);
@@ -83,9 +83,9 @@ function renderQualities(qualities) {
 
     const icons = [
         "flaticon-file", "flaticon-book", "flaticon-shield",
-        "flaticon-pen",  "flaticon-plane","flaticon-fingerprint"
+        "flaticon-pen", "flaticon-plane", "flaticon-fingerprint"
     ];
-    const numbers = ["01","02","03","04","05","06","07","08","09","10"];
+    const numbers = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"];
 
     // unslick first if already initialized
     const $carousel = $(container);
@@ -95,7 +95,7 @@ function renderQualities(qualities) {
 
     container.innerHTML = qualities.map((q, i) => {
         const iconEl = q.icon?.image_url
-            ? `<img src="${q.icon.image_url}" alt="${field(q,'name')}"
+            ? `<img src="${q.icon.image_url}" alt="${field(q, 'name')}"
                     style="height:50px;object-fit:contain;">`
             : `<i class="flaticon ${icons[i % icons.length]}"></i>`;
 
@@ -103,7 +103,7 @@ function renderQualities(qualities) {
         <div>
             <div class="txbdsva allcostyle boxsh boxpsv text-center sselect"
                  style="margin: 0 10px;">
-                <span class="thbdspanposi">${numbers[i] || String(i+1).padStart(2,'0')}</span>
+                <span class="thbdspanposi">${numbers[i] || String(i + 1).padStart(2, '0')}</span>
                 <div class="txbdsi">
                     <div class="txbdicon iconalltf iconall iconallactive">${iconEl}</div>
                     <div class="txbdcon">
@@ -124,12 +124,12 @@ function renderQualities(qualities) {
 
     setTimeout(() => {
         $carousel.slick({
-            infinite:      false,      // ← no round robin
-            autoplay:      false,
-            slidesToShow:  Math.min(total, 3),
-            slidesToScroll:1,
-            arrows:        true,
-            dots:          false,
+            infinite: false,      // ← no round robin
+            autoplay: false,
+            slidesToShow: Math.min(total, 3),
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
             responsive: [
                 {
                     breakpoint: 1200,
@@ -160,9 +160,9 @@ function renderDomains(domains) {
     ];
 
     container.innerHTML = domains.map((d, i) => {
-        const name    = field(d, "name");
-        const desc    = field(d, "description");   // ← picks right language
-        const iconEl  = d.icon?.image_url
+        const name = field(d, "name");
+        const desc = field(d, "description");
+        const iconEl = d.icon?.image_url
             ? `<img src="${d.icon.image_url}" alt="${name}"
                     style="height:50px;object-fit:contain;">`
             : `<i class="flaticon ${fallbackIcons[i % fallbackIcons.length]}"></i>`;
@@ -214,25 +214,25 @@ function renderPartners(partners) {
     // Step 3 — reinit with same Slick config as theme.js brand_active
     setTimeout(() => {
         $carousel.slick({
-            infinite:      true,
-            autoplay:      true,
+            infinite: true,
+            autoplay: true,
             autoplaySpeed: 3000,
-            speed:         1000,
-            slidesToShow:  5,
-            slidesToScroll:1,
-            arrows:        true,
-            dots:          false,
+            speed: 1000,
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            arrows: true,
+            dots: false,
             responsive: [
                 { breakpoint: 1200, settings: { slidesToShow: 5, slidesToScroll: 1 } },
-                { breakpoint: 992,  settings: { slidesToShow: 4, slidesToScroll: 1 } },
-                { breakpoint: 767,  settings: { slidesToShow: 2, slidesToScroll: 1 } }
+                { breakpoint: 992, settings: { slidesToShow: 4, slidesToScroll: 1 } },
+                { breakpoint: 767, settings: { slidesToShow: 2, slidesToScroll: 1 } }
             ]
         });
     }, 100);
 }
 
-// ─── FEATURED PROJECTS — also uses Slick (.proj_act) ─────────────
-
+// ─── FEATURED PROJECTS  ─────────────
+/*
 async function loadFeaturedProjects() {
     const container = document.getElementById("featured-projects-container");
     if (!container) return;
@@ -245,27 +245,62 @@ async function loadFeaturedProjects() {
         if (!Array.isArray(projects) || projects.length === 0) return;
 
         const $carousel = $(container);
-
-        // Unslick before touching DOM
         if ($carousel.hasClass("slick-initialized")) {
             $carousel.slick("unslick");
         }
 
+        const formatDate = (dateStr) => {
+            if (!dateStr) return "";
+            const d = new Date(dateStr);
+            return d.toLocaleDateString(
+                getLang() === "ar" ? "ar-DZ" :
+                getLang() === "fr" ? "fr-FR" : "en-GB",
+                { year: "numeric", month: "long" }
+            );
+        };
+
         container.innerHTML = projects.map(project => {
             const img    = project.images?.[0]?.image_url || "assets/images/pot01.jpg";
             const title  = field(project, "title");
-            const status = project.status ? field(project.status, "status") : "";
+            const status = project.status ? field(project.status, "status") : null;
+
+            const endDate   = project.end_date        ? formatDate(project.end_date)        : null;
+            const startDate = project.start_date      ? formatDate(project.start_date)      : null;
+            const estDate   = project.estimated_date  ? formatDate(project.estimated_date)  : null;
+
+            // use status_en for reliable condition matching regardless of selected language
+            const statusEn  = project.status?.status_en?.toLowerCase() || "";
+            let dateLabel   = "";
+
+            if (statusEn === "finished") {
+                dateLabel = endDate || "";
+            } else if (statusEn === "in progress") {
+                dateLabel = estDate || startDate || "";
+            } else if (statusEn === "paused" || statusEn === "delayed") {
+                dateLabel = startDate || "";
+            } else if (statusEn === "pending") {
+                dateLabel = startDate || "";
+            } else if (statusEn === "cancelled") {
+                dateLabel = "";
+            }
+
+            const statusHtml = status ? `
+                <p class="proj-status">
+                    ${status}
+                    ${dateLabel ? `<span class="proj-date">${dateLabel}</span>` : ""}
+                </p>` : "";
 
             return `
             <div class="item_pos col-lg-12">
-                <div class="witr_single_pslide">
+                <div class="witr_single_pslide proj-hover-card">
                     <div class="witr_pslide_image">
-                        <img src="${img}" alt="${title}">
+                        <img src="${img}" alt="${title}"
+                             style="width:100%;height:300px;object-fit:cover;display:block;">
                     </div>
-                    <div class="witr_content_pslide_text">
-                        <div class="witr_content_pslide">
+                    <div class="proj-overlay">
+                        <div class="proj-overlay-content">
                             <h2><a href="project.html?id=${project.id}">${title}</a></h2>
-                            ${status ? `<p>${status}</p>` : ""}
+                            ${statusHtml}
                         </div>
                     </div>
                     <div class="witr_pslide_custom">
@@ -277,7 +312,97 @@ async function loadFeaturedProjects() {
             </div>`;
         }).join("");
 
-        // Reinit with same Slick config as theme.js proj_act
+        setTimeout(() => {
+            $carousel.slick({
+                infinite:      true,
+                autoplay:      true,
+                autoplaySpeed: 6000,
+                speed:         2000,
+                slidesToShow:  3,
+                slidesToScroll:1,
+                arrows:        true,
+                dots:          false,
+                responsive: [
+                    { breakpoint: 1200, settings: { slidesToShow: 3, slidesToScroll: 1 } },
+                    { breakpoint: 992,  settings: { slidesToShow: 2, slidesToScroll: 1 } },
+                    { breakpoint: 767,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
+                ]
+            });
+        }, 100);
+
+    } catch (err) {
+        console.error("Failed to load projects:", err);
+    }
+}
+*/
+async function loadFeaturedProjects() {
+    const container = document.getElementById("featured-projects-container");
+    if (!container) return;
+
+    try {
+        const res  = await fetch(`${API_BASE}/projects/?featured=true`);
+        const data = await res.json();
+        const projects = data.results || data || [];
+
+        if (!Array.isArray(projects) || projects.length === 0) return;
+
+        const $carousel = $(container);
+        if ($carousel.hasClass("slick-initialized")) {
+            $carousel.slick("unslick");
+        }
+
+        const formatDate = (dateStr) => {
+            if (!dateStr) return "";
+            const d = new Date(dateStr);
+            return d.toLocaleDateString(
+                getLang() === "ar" ? "ar-DZ" :
+                getLang() === "fr" ? "fr-FR" : "en-GB",
+                { year: "numeric", month: "long" }
+            );
+        };
+
+        container.innerHTML = projects.map(project => {
+            const img      = project.images?.[0]?.image_url || "assets/images/pot01.jpg";
+            const title    = field(project, "title");
+            const status   = project.status ? field(project.status, "status") : null;
+            const statusEn = project.status?.status_en?.toLowerCase() || "";
+
+            const endDate   = project.end_date       ? formatDate(project.end_date)       : null;
+            const startDate = project.start_date     ? formatDate(project.start_date)     : null;
+            const estDate   = project.estimated_date ? formatDate(project.estimated_date) : null;
+
+            let dateLabel = "";
+            if      (statusEn === "finished")                        dateLabel = endDate   || "";
+            else if (statusEn === "in progress")                     dateLabel = estDate   || startDate || "";
+            else if (statusEn === "paused" || statusEn === "delayed") dateLabel = startDate || "";
+            else if (statusEn === "pending")                         dateLabel = startDate || "";
+
+            // status line — same style as static "En Pause" / "En Cours Realise"
+            const statusLine = status
+                ? `${status}${dateLabel ? " — " + dateLabel : ""}`
+                : "";
+
+            return `
+            <div class="item_pos col-lg-12">
+                <div class="witr_single_pslide">
+                    <div class="witr_pslide_image">
+                        <img src="${img}" alt="${title}">
+                    </div>
+                    <div class="witr_content_pslide_text">
+                        <div class="witr_content_pslide">
+                            <h2><a href="project.html?id=${project.id}">${title}</a></h2>
+                            ${statusLine ? `<p>${statusLine}</p>` : ""}
+                        </div>
+                    </div>
+                    <div class="witr_pslide_custom">
+                        <a href="project.html?id=${project.id}" tabindex="-1">
+                            <span class="txbdbrac ti-arrow-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>`;
+        }).join("");
+
         setTimeout(() => {
             $carousel.slick({
                 infinite:      true,
@@ -332,7 +457,7 @@ function renderFooterContact(company) {
     const addressEl = document.getElementById("footer-address");
     if (addressEl && company.addresses?.length) {
         const primary = company.addresses.find(a => a.is_primary) || company.addresses[0];
-        const parts   = [
+        const parts = [
             field(primary, "address_line1"),
             field(primary, "city"),
             field(primary, "country")
@@ -358,12 +483,12 @@ const contactForm = document.getElementById("contact-form");
 if (contactForm) {
     contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const get     = n => contactForm.querySelector(`[name="${n}"]`)?.value.trim() || "";
-        const name    = get("name"),  email   = get("email"),
-              phone   = get("number"), subject = get("subject"),
-              message = get("comment");
-        const msgEl   = contactForm.querySelector(".form-messege");
-        const btn     = contactForm.querySelector("button[type='submit']");
+        const get = n => contactForm.querySelector(`[name="${n}"]`)?.value.trim() || "";
+        const name = get("name"), email = get("email"),
+            phone = get("number"), subject = get("subject"),
+            message = get("comment");
+        const msgEl = contactForm.querySelector(".form-messege");
+        const btn = contactForm.querySelector("button[type='submit']");
 
         if (!name || !email || !message) {
             msgEl.textContent = t("error_fields");
@@ -377,9 +502,9 @@ if (contactForm) {
 
         try {
             const res = await fetch(`${API_BASE}/contact/`, {
-                method:  "POST",
+                method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body:    JSON.stringify({ name, email, phone, subject, message })
+                body: JSON.stringify({ name, email, phone, subject, message })
             });
             if (res.ok) {
                 msgEl.textContent = t("success_msg");
