@@ -6012,3 +6012,25 @@ body.rtl .tinymce-content ol {
 /* RTL */
 body.rtl .proj-overlay { text-align: right; }
 body.rtl .proj-status  { flex-direction: row-reverse; justify-content: flex-end; }
+
+
+/* ══ SLICK RTL FIX ════════════════════════════════════════════ */
+/* Slick internally uses transforms and LTR — never let RTL break it */
+body.rtl .slick-slider,
+body.rtl .slick-list,
+body.rtl .slick-track,
+body.rtl .slick-slide {
+    direction: ltr !important;
+}
+
+/* but content inside each slide should still be RTL */
+body.rtl .slick-slide > div,
+body.rtl .slick-slide .txbdscontent,
+body.rtl .slick-slide .txbdsvtitle,
+body.rtl .slick-slide .txbdcon,
+body.rtl .slick-slide .slide_items,
+body.rtl .slick-slide .witr_single_pslide,
+body.rtl .slick-slide .txbdsva {
+    direction: rtl !important;
+    text-align: right !important;
+}
