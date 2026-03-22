@@ -9,6 +9,9 @@ class DomainActivity(models.Model):
     name_en        = models.CharField(max_length=50)
     name_fr        = models.CharField(max_length=50, blank=True, null=True)
     name_ar        = models.CharField(max_length=50, blank=True, null=True)
+    description_en = models.TextField(blank=True, null=True)   # ← add
+    description_fr = models.TextField(blank=True, null=True)   # ← add
+    description_ar = models.TextField(blank=True, null=True)   # ← add
     icon    = models.ForeignKey(
         Image,
         on_delete=models.SET_NULL,
@@ -89,6 +92,19 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name_en
+    
+    def clean(self):
+        if self.is_main:
+            existing = Company.objects.filter(is_main=True).exclude(pk=self.pk).first()
+            if existing:
+                raise ValidationError(
+                    f'"{existing.name_en}" is already the main company. '
+                    f'Unset it first before setting another as main.'
+                )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()   # ← triggers clean() on every save
+        super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
         self.is_active = False
@@ -211,7 +227,7 @@ class CompanyAddress(models.Model):
         verbose_name_plural = "Company Addresses"
 
     def __str__(self):
-        return f"{self.address_line1} ({self.company.name_en})"
+        return f"{self.address_line1_en} ({self.company.name_en})"
 
     def delete(self, *args, **kwargs):
         self.is_active = False

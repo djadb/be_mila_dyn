@@ -5905,3 +5905,49 @@ blockquote {
  .tx_btn_global_color:hover{
      background:#000;
 }
+
+/* ══ TINYMCE CONTENT — override template list resets ══════════ */
+.tinymce-content ul,
+.tinymce-content ol {
+    padding-left: 24px !important;
+    margin-bottom: 14px !important;
+    list-style: revert !important;   /* restores browser default */
+}
+
+.tinymce-content p {
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;    /* reduce from 14px to 6px — adjust to taste */
+    line-height: 1.6 !important;
+}
+
+/* remove extra margin on last paragraph */
+.tinymce-content p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.tinymce-content ul {
+    list-style-type: disc !important;
+}
+
+.tinymce-content ol {
+    list-style-type: decimal !important;
+}
+
+.tinymce-content li {
+    display: list-item !important;   /* template may set display:block or flex */
+    list-style: revert !important;
+    margin-bottom: 6px !important;
+    line-height: 1.8 !important;
+    padding: 0 !important;           /* template may add padding that shifts bullets */
+}
+
+.tinymce-content li::before {
+    display: none !important;        /* template may inject fake bullets via ::before */
+}
+
+/* RTL */
+body.rtl .tinymce-content ul,
+body.rtl .tinymce-content ol {
+    padding-left: 0 !important;
+    padding-right: 24px !important;
+}

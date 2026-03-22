@@ -44,16 +44,34 @@ class CompanyAddressInline(admin.StackedInline):
 
 @admin.register(DomainActivity)
 class DomainActivityAdmin(SimpleHistoryAdmin):
-    list_display        = ("icon_preview", "name_en", "name_fr", "name_ar")
+    list_display        = ("name_en", "name_fr", "name_ar")
     search_fields       = ("name_en", "name_fr", "name_ar")
     autocomplete_fields = ("icon",)
     readonly_fields     = ("icon_preview",)
 
+    fieldsets = (
+        ("English", {
+            "fields": ("name_en", "description_en")
+        }),
+        ("French", {
+            "fields": ("name_fr", "description_fr")
+        }),
+        ("Arabic", {
+            "fields": ("name_ar", "description_ar")
+        }),
+        ("Icon", {
+            "fields": ("icon_preview", "icon")
+        }),
+    )
+
     def icon_preview(self, obj):
         if obj.icon and obj.icon.image:
-            return format_html('<img src="{}" style="height:40px; border-radius:4px;"/>', obj.icon.image.url)
+            return format_html(
+                '<img src="{}" style="height:40px; border-radius:4px;"/>',
+                obj.icon.image.url
+            )
         return "No icon"
-    icon_preview.short_description = "Icon"
+    icon_preview.short_description = "Icon Preview"
 
 
 @admin.register(CompanyQuality)
@@ -72,8 +90,9 @@ class CompanyQualityAdmin(SimpleHistoryAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(SimpleHistoryAdmin):
-    list_display        = ("logo_preview", "name_en", "website", "is_active","is_main")
-    list_filter         = ("is_active", "domains", "qualities")
+    list_display      = ("logo_preview", "name_en", "is_main", "website", "is_active")
+    list_filter       = ("is_active", "is_main", "domains", "qualities")
+    list_editable     = ("is_main",)
     search_fields       = ("name_en", "name_fr", "name_ar")
     filter_horizontal   = ("domains", "qualities", "partners")
     autocomplete_fields = ("logo",)
