@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <title>BE-MILA – Contact</title>
+        <title>BE-MILA – À Propos</title>
         <meta charset="utf-8">
         <meta name="format-detection" content="telephone=no">
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0,  user-scalable=0">
@@ -17,7 +17,6 @@
         <style>
             /* ══ RTL SUPPORT ══════════════════════════════════════ */
             body.rtl { direction: rtl; text-align: right; }
-            
 
             /* owl carousel — must stay LTR internally or slides break */
             body.rtl .owl-carousel { direction: ltr; }
@@ -43,22 +42,22 @@
             body.rtl .nav-tabs       { direction: rtl; }
             body.rtl .tab-content    { direction: rtl; }
 
-            /* contact section */
-            body.rtl .cont_left                      { direction: rtl; text-align: right; }
-            body.rtl .cont_left .tts.text-left       { text-align: right !important; }
-            body.rtl .cont_left_btm .tts.text-left   { text-align: right !important; }
-            body.rtl .cont_left .icon-list-icon      { margin-left: 0px; margin-right: 40px; }
-            body.rtl .cont_witr                      { direction: rtl; }
+            /* contact */
+            body.rtl .cont_left                    { direction: rtl; text-align: right; }
+            body.rtl .cont_left .tts.text-left     { text-align: right !important; }
+            body.rtl .cont_left_btm .tts.text-left { text-align: right !important; }
+            body.rtl .cont_left .icon-list-icon    { margin-left: 8px; margin-right: 0; }
+            body.rtl .cont_witr                    { direction: rtl; }
             body.rtl .cont_witr .twr_form_box input,
             body.rtl .cont_witr .twr_form_box textarea { text-align: right; direction: rtl; }
-            body.rtl .cont_witr .text-left           { text-align: right !important; }
-            
+            body.rtl .cont_witr .text-left         { text-align: right !important; }
 
             /* footer */
             body.rtl .witrfm_area    { direction: rtl; }
             body.rtl .social-icons a { margin-left: 10px; margin-right: 0; }
 
             /* ── phones, emails and numbers always LTR ──────────── */
+            /* applied via inline style in app.js & also here for safety */
             .ltr-always {
                 direction: ltr !important;
                 unicode-bidi: embed !important;
@@ -136,10 +135,10 @@
                             <div class="col-md-9 col-sm-9 col-xs-8">
                             <nav class="congat_menu nologo_menu13 main-search-menu">
                                 <ul class="sub-menu">
-                                    <li><a href="index.html"   data-t="home">Accueil</a></li>
-                                    <li><a href="about.html"   data-t="about">A propos</a></li>
-                                    <li><a href="project.html" data-t="projects">Nos Projets</a></li>
-                                    <li><a href="contact.html" data-t="contact">Contact</a></li>
+                                    <li><a href="index.html"        data-t="home">Accueil</a></li>
+                                    <li><a href="about.html"        data-t="about">A propos</a></li>
+                                    <li><a href="project.html"      data-t="projects">Nos Projets</a></li>
+                                    <li><a href="contact.html"      data-t="contact">Contact</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#" data-t="language">Langue</a>
                                         <ul class="sub-menu">
@@ -149,6 +148,14 @@
                                         </ul>
                                     </li>
                                 </ul>
+                               <!-- <div class="tx_right_otherx d-flex align-items-center">
+                                    <div class="donate-btn-header lang-selector">
+                                        <a href="#" class="lang-link" data-lang="fr" onclick="setLang('fr'); return false;">FR</a>
+                                        <a href="#" class="lang-link" data-lang="en" onclick="setLang('en'); return false;">EN</a>
+                                        <a href="#" class="lang-link" data-lang="ar" onclick="setLang('ar'); return false;">AR</a>
+                                    </div>
+                                </div>
+                               -->
                             </nav>
                         </div>
                             </div>
@@ -189,7 +196,7 @@
                                                             <li><a href="index.html" data-t="home">Home</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="about.html"   data-t="about">About</a></li>
+                                                    <li><a href="about.html" data-t="about">About</a></li>
                                                     <li><a href="project.html" data-t="projects">Project</a></li>
                                                     <li><a href="contact.html" data-t="contact">Contact</a></li>
                                                     <li class="menu-item-has-children">
@@ -230,7 +237,8 @@
             </div>
         </div>
 
-        <!-- ══ CONTACT AREA ═════════════════════════════════════════════ -->
+
+        <!-- contact area -->
         <div class="cg_cont_area cont_page_cont">
             <div class="container">
                 <div class="row">
@@ -243,14 +251,14 @@
                                     <p data-t="cont_desc">Bring to the table win-win survival strategies to ensure proactive domination a new normal that has evolved from generation.</p>
                                 </div>
                             </div>
-                            <!--<div class="txbdsva allcostyle boxsh boxpsv sselect">
+                            <div class="txbdsva allcostyle boxsh boxpsv sselect">
                                 <div class="txbdsi txbdsvflex txbdsvfdrl">
                                     <div class="txbdcon sp-txbdsvfdrl">
                                         <h2 class="txbdsvtitle txstcolor hlight" data-t="emergency">Emergency support center 24/7</h2>
                                         <p id="contact-primary-phone" style="direction:ltr;unicode-bidi:embed;display:inline-block;"></p>
                                     </div>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="cont_left_btm">
                                 <div class="tts text-left">
                                     <div class="ttin">
@@ -258,26 +266,26 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- primary email injected by contact.js -->
                             <ul class="icon-list-items inline-items" id="contact-emails">
-                                <!-- <li class="icon-list-item inline-item">
+                                <!-- dynamic primary email injected by contact.js -->
+                                <li class="icon-list-item inline-item">
                                     <span class="icon-list-icon"><i class="flaticon flaticon-mail"></i></span>
-                                    <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">dg@be-mila.dz</span>
-                                </li> -->
+                                    <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;"></span>
+                                </li>
                             </ul>
-                            <!-- primary phone injected by contact.js -->
                             <ul class="icon-list-items inline-items" id="contact-phones">
-                                <!-- <li class="icon-list-item inline-item">
+                                <!-- dynamic primary phone injected by contact.js -->
+                                <li class="icon-list-item inline-item">
                                     <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
-                                    <span class="icon-list-text ltr-always">031 46 57 09</span>
-                                </li> -->
+                                    <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;"></span>
+                                </li>
                             </ul>
-                            <!-- primary address injected by contact.js -->
                             <ul class="icon-list-items" id="contact-address">
-                                <!-- <li class="icon-list-item inline-item">
+                                <!-- dynamic primary address injected by contact.js -->
+                                <li class="icon-list-item inline-item">
                                     <span class="icon-list-icon"><i class="ti ti-map-alt"></i></span>
-                                    <span class="icon-list-text">Cité Sénnaoua W.Mila.43000</span>
-                                </li> -->
+                                    <span class="icon-list-text"></span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -314,10 +322,7 @@
                                             </div>
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="text-left">
-                                                    <button type="submit" name="ok" class="btn">
-                                                        <span data-t="send_message">Send Message</span>
-                                                        <span><i class="icofont-thin-double-right"></i></span>
-                                                    </button>
+                                                    <button type="submit" name="ok" class="btn"><span data-t="send_message">Send Message</span> <span> <i class="icofont-thin-double-right"></i></span></button>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-left">
@@ -332,14 +337,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- ══ MAP ══════════════════════════════════════════════════════ -->
+        <!-- map area -->
         <div class="cm_map_area">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 witr_all_pd0">
                         <div class="map_inner_area">
-                            <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDoOLq_ts27g3vEog9sGYB0GJSyWBDK9gs&center=36.4519049%2C6.2584338&zoom=14&q=Cit%C3%A9%20S%C3%A9nnaoua%20W.MILA%2043000"></iframe>
+                            <iframe src="https://maps.google.com/maps?q=webitrangpur&amp;t=m&amp;z=10&amp;output=embed&amp;iwloc=near" title="webitrangpur"></iframe>
                         </div>
                     </div>
                 </div>
@@ -353,13 +357,20 @@
                     <div class="col-lg-12">
                         <div class="txbdicarosel allcostyle">
                             <div class="witr_carousel_main row brand_active" id="partners-container">
-                                <!-- dynamic partners injected by contact.js -->
+                                <!-- static fallback — replaced by app.js if partners exist in DB 
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br01.png" alt="image"></a></div>
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br02.png" alt="image"></a></div>
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br03.png" alt="image"></a></div>
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br04.png" alt="image"></a></div>
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br05.png" alt="image"></a></div>
+                                <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br06.png" alt="image"></a></div>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- ══ FOOTER — dynamic contact info ═════════════════════════════ -->
         <div class="witrfm_area">
@@ -393,18 +404,21 @@
                                 <!-- ↓ Dynamic contact info from DB
                                      direction:ltr on emails/phones so they never flip in Arabic -->
                                 <ul class="icon-list-items" id="footer-emails">
+                                    <!-- dynamic emails injected by app.js -->
                                     <li class="icon-list-item">
                                         <span class="icon-list-icon"><i class="flaticon flaticon-mail"></i></span>
-                                        <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">dg@be-mila.dz</span>
+                                        <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1175765173743c7c787d703f756b">[email&#160;protected]</a></span>
                                     </li>
                                 </ul>
                                 <ul class="icon-list-items" id="footer-phones" style="margin-top:10px;">
+                                    <!-- dynamic phones injected by app.js -->
                                     <li class="icon-list-item">
                                         <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
                                         <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">031 46 57 09</span>
                                     </li>
                                 </ul>
                                 <ul class="icon-list-items" id="footer-address" style="margin-top:10px;">
+                                    <!-- dynamic address injected by app.js -->
                                     <li class="icon-list-item">
                                         <span class="icon-list-icon"><i class="ti ti-map-alt"></i></span>
                                         <span class="icon-list-text">Cité Sénnaoua W.Mila.43000</span>
@@ -428,7 +442,7 @@
         </div>
 
         <!-- ══ SCRIPTS ═══════════════════════════════════════════════════ -->
-        <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/isotope.pkgd.min.js"></script>
         <script src="assets/js/owl.carousel.min.js"></script>
@@ -437,11 +451,3 @@
         <script src="venobox/venobox.min.js"></script>
         <script src="assets/js/jquery.appear.js"></script>
         <script src="assets/js/jquery.knob.js"></script>
-        <script src="assets/js/theme-pluginjs.js"></script>
-        <script src="assets/js/jquery.meanmenu.js"></script>
-        <script src="assets/js/theme.js"></script>
-        <!-- ↓ YOUR FILES — must come after jQuery and theme.js -->
-        <script src="config.js"></script>
-        <script src="contact.js"></script>
-    </body>
-</html>
