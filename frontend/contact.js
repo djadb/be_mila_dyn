@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
         applyTranslations();
         forceTranslateSlick();
         applyBreadcrumb();
+        const mapIframe = document.getElementById("google-map-iframe");
+        if (mapIframe && typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.google_maps_source) {
+            mapIframe.src = SITE_CONFIG.google_maps_source;
+        }
         await loadCompany();
         await loadFeaturedProjects();
     }, 600);
@@ -586,21 +590,31 @@ if (contactForm) {
         msgEl.textContent = "";
 
         try {
-            const res = await fetch(`${API_BASE}/contact/`, {
+            // Include the destination email from config.js
+            const targetEmail = typeof SITE_CONFIG !== 'undefined' ? SITE_CONFIG.contactEmail : "";
+
+            // Point fetch to your local PHP file instead of API_BASE
+            const res = await fetch(`mail.php`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, phone, subject, message })
+                body: JSON.stringify({ name, email, phone, subject, message, targetEmail })
             });
+            
             if (res.ok) {
-                msgEl.textContent = t("success_msg");
-                msgEl.style.color = "green";
-                contactForm.reset();
+                const d = await res.json();
+                if(d.success) {
+                    msgEl.textContent = t("success_msg");
+                    msgEl.style.color = "green";
+                    contactForm.reset();
+                } else {
+                    msgEl.textContent = d.error || t("error_msg");
+                    msgEl.style.color = "red";
+                }
             } else {
-                const d = await res.json().catch(() => ({}));
-                msgEl.textContent = d.error || t("error_msg");
+                msgEl.textContent = t("error_msg");
                 msgEl.style.color = "red";
             }
-        } catch {
+        } catch (err) {
             msgEl.textContent = t("error_msg");
             msgEl.style.color = "red";
         } finally {

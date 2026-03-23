@@ -9,7 +9,9 @@ const SITE_CONFIG = {
         about:    "assets/images/about_2000x1121.png",
     },
     google_maps_source : "https://www.google.com/maps/embed/v1/place?key=AIzaSyDoOLq_ts27g3vEog9sGYB0GJSyWBDK9gs&center=36.4519049%2C6.2584338&zoom=14&q=Cit%C3%A9%20S%C3%A9nnaoua%20W.MILA%2043000",
-    projects_per_page: 60,
+   // contact_mail : "bem.43.mila@gmail.com",
+    contact_mail : "benguerra.djad@gmail.com",
+   projects_per_page: 60,
 };
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
