@@ -56,6 +56,108 @@
                 unicode-bidi: embed !important;
                 display: inline-block;
             }
+            /* ── Project Card Container ─────────────────────────── */
+            .proj-card {
+                position: relative;
+                overflow: hidden;
+            }
+
+            /* ── Image ─────────────────────────── */
+            .proj-card img {
+                display: block;
+                width: 100%;
+            }
+
+            /* ── Image switcher arrows ─────────────────────────── */
+            .img-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0,0,0,.5);
+                color: #fff;
+                border: none;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 18px;
+                line-height: 32px;
+                text-align: center;
+                z-index: 10;
+                transition: background .2s;
+                display: none;
+            }
+
+            .img-nav:hover {
+                background: #F45B1E;
+            }
+
+            .img-nav.prev-img {
+                left: 10px;
+            }
+
+            .img-nav.next-img {
+                right: 10px;
+            }
+
+            .proj-card:hover .img-nav {
+                display: block;
+            }
+
+            .proj-card[data-img-count="1"]:hover .img-nav {
+                display: none;
+            }
+
+            /* ── Image dots ─────────────────────────────────────── */
+            .img-dots {
+                position: absolute;
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+                gap: 6px;
+                z-index: 10;
+            }
+
+            .proj-card:hover .img-dots {
+                display: flex;
+            }
+
+            .proj-card[data-img-count="1"]:hover .img-dots {
+                display: none;
+            }
+
+            .img-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: rgba(255,255,255,.5);
+                cursor: pointer;
+                transition: background .2s;
+            }
+
+            .img-dot.active {
+                background: #F45B1E;
+            }
+
+            /* ── About Button (center fix) ─────────────────────── */
+            .about-btn {
+                display: block;
+                margin: 20px auto;
+                text-align: center;
+            }
+            
+            /* ── Make the column take full height ───────────────── */
+            #company-images {
+                display: flex;
+                align-items: flex-start; /* Pushes the image to the top */
+                justify-content: center;
+            }
+            
+            .about_image_slider {
+                height: 100%;
+  object-fit: cover;
+            }
 
             /* ══ LANG SWITCHER ════════════════════════════════════ */
             .lang-link {
@@ -313,8 +415,8 @@
          <!-- ══ ABOUT ═══════════════════ -->
         <div class="cg_about_area">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-6" id="company-images">
                         <div class="ab_left_inner">
                             <div class="single_image_area">
                                 <div class="single_image single_line_option">

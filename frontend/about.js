@@ -63,12 +63,16 @@ async function loadCompany() {
         const res = await fetch(`${API_BASE}/company/main/`);
         if (!res.ok) { console.warn("No main company configured."); return; }
         const company = await res.json();
-
+        
         // ── About description
         const descEl = document.getElementById("company-description");
         if (descEl) {
             const text = field(company, "description");
-            if (text) descEl.innerHTML = text;  // ← innerHTML renders the HTML tags
+            if (text) descEl.innerHTML = text;  
+        }
+        
+        if(company.images?.length) {
+            renderCompanyImages(company.images);
         }
 
         // ── Qualities → feature cards
@@ -87,6 +91,115 @@ async function loadCompany() {
         console.error("Failed to load company:", err);
     }
 }
+
+/*
+function renderCompanyImages(images) {
+    const container = document.getElementById("company-images");
+    if (!container || !images.length) return;
+
+    const imgUrls = images.map(img => img.image_url);
+    const imgData = JSON.stringify(imgUrls).replace(/"/g, "&quot;");
+
+    const dotsHtml = imgUrls.length > 1
+        ? `<div class="img-dots">
+            ${imgUrls.map((_, i) =>
+                `<span class="img-dot${i === 0 ? " active" : ""}" data-idx="${i}"></span>`
+            ).join("")}
+           </div>`
+        : "";
+
+    container.innerHTML = `
+        <div class="about_image_slider">
+            <div class="ab_left_inner single_image_area proj-card"
+                 data-img-count="${imgUrls.length}"
+                 data-imgs="${imgData}"
+                 data-current="0">
+
+                <button class="img-nav prev-img">&#8249;</button>
+                <div class="single_image single_line_option">
+                <img class="proj-main-img"
+                     src="${imgUrls[0]}"
+                     alt="Company Image"
+                     style="width:100%;height:300px;object-fit:cover;transition:opacity .15s;">
+                </div>
+                <button class="img-nav next-img">&#8250;</button>
+
+                ${dotsHtml}
+            </div>
+        </div>
+    `;
+
+    // attach slider behavior
+    const card = container.querySelector(".proj-card");
+    if (card) attachImageSwitcher(card);
+}
+*/
+
+function renderCompanyImages(images) {
+    const container = document.getElementById("company-images");
+    if (!container || !images.length) return;
+
+    const imgUrls = images.map(img => img.image_url);
+    const imgData = JSON.stringify(imgUrls).replace(/"/g, "&quot;");
+
+    const dotsHtml = imgUrls.length > 1
+        ? `<div class="img-dots">
+            ${imgUrls.map((_, i) =>
+                `<span class="img-dot${i === 0 ? " active" : ""}" data-idx="${i}"></span>`
+            ).join("")}
+           </div>`
+        : "";
+
+    container.innerHTML = `
+        <div class="ab_left_inner single_image_area proj-card"
+             style="width: 85%; margin: 30px auto 0; overflow: hidden; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"
+             data-img-count="${imgUrls.length}"
+             data-imgs="${imgData}"
+             data-current="0">
+
+            <button class="img-nav prev-img">&#8249;</button>
+            <div class="single_image single_line_option" style="margin: 0;">
+                <img class="proj-main-img"
+                     src="${imgUrls[0]}"
+                     alt="Company Image"
+                     style="width: 100%; height: 420px; object-fit: cover; display: block; transition: opacity .15s;">
+            </div>
+            <button class="img-nav next-img">&#8250;</button>
+
+            ${dotsHtml}
+        </div>
+    `;
+
+    // attach slider behavior
+    const card = container.querySelector(".proj-card");
+    if (card) attachImageSwitcher(card);
+}
+
+
+function attachImageSwitcher(card) {
+    const imgEl   = card.querySelector(".proj-main-img");
+    const prevBtn = card.querySelector(".prev-img");
+    const nextBtn = card.querySelector(".next-img");
+    const dots    = card.querySelectorAll(".img-dot");
+    const imgs    = JSON.parse(card.dataset.imgs.replace(/&quot;/g, '"'));
+    let current   = 0;
+
+    function goTo(idx) {
+        current         = (idx + imgs.length) % imgs.length;
+        imgEl.style.opacity = "0";
+        setTimeout(() => {
+            imgEl.src           = imgs[current];
+            imgEl.style.opacity = "1";
+        }, 150);
+        card.dataset.current = current;
+        dots.forEach((d, i) => d.classList.toggle("active", i === current));
+    }
+
+    if (prevBtn) prevBtn.addEventListener("click", e => { e.preventDefault(); goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener("click", e => { e.preventDefault(); goTo(current + 1); });
+    dots.forEach((d, i) => d.addEventListener("click", () => goTo(i)));
+}
+
 
 // ─── QUALITIES ───────────────────────────────────────────────────
 /*
