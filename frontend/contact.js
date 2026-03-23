@@ -519,21 +519,16 @@ function renderFooterContact(company) {
             </li>`;
     }
 
-    // ── Contact section: primary phone (emergency box)
-    const primaryPhoneEl = document.getElementById("contact-primary-phone");
-    if (primaryPhoneEl && company.phones?.length) {
-        const primary = company.phones.find(p => p.is_primary) || company.phones[0];
-        primaryPhoneEl.textContent = primary.phone_number;
-    }
+    
 
     // ── Contact section: primary email
     const contEmailsEl = document.getElementById("contact-emails");
     if (contEmailsEl && company.emails?.length) {
         const primary = company.emails.find(e => e.is_primary) || company.emails[0];
         contEmailsEl.innerHTML = `
-            <li class="icon-list-item inline-item">
+            <li class="icon-list-item">
                 <span class="icon-list-icon"><i class="flaticon flaticon-mail"></i></span>
-                <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">
+                <span class="icon-list-text ltr-always" style="direction:ltr;unicode-bidi:embed;">
                     <a href="mailto:${primary.email}" style="color:inherit;">${primary.email}</a>
                 </span>
             </li>`;
@@ -544,7 +539,7 @@ function renderFooterContact(company) {
     if (contPhonesEl && company.phones?.length) {
         const primary = company.phones.find(p => p.is_primary) || company.phones[0];
         contPhonesEl.innerHTML = `
-            <li class="icon-list-item inline-item">
+            <li class="icon-list-item">
                 <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
                 <span class="icon-list-text ltr-always" style="direction:ltr;unicode-bidi:embed;">${primary.phone_number}</span>
             </li>`;
@@ -560,7 +555,7 @@ function renderFooterContact(company) {
             field(primary, "country")
         ].filter(Boolean);
         contAddressEl.innerHTML = `
-            <li class="icon-list-item inline-item">
+            <li class="icon-list-item">
                 <span class="icon-list-icon"><i class="ti ti-map-alt"></i></span>
                 <span class="icon-list-text">${parts.join(", ")}</span>
             </li>`;

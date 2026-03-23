@@ -54,6 +54,15 @@
             body.rtl .cont_witr .text-left           { text-align: right !important; }
             
 
+            
+
+            body.rtl #contact-emails .icon-list-icon,
+            body.rtl #contact-phones .icon-list-icon,
+            body.rtl #contact-address .icon-list-icon {
+                margin-right: 0px !important;
+                margin-left: 10px !important;
+            }
+
             /* footer */
             body.rtl .witrfm_area    { direction: rtl; }
             body.rtl .social-icons a { margin-left: 10px; margin-right: 0; }
@@ -259,14 +268,14 @@
                                 </div>
                             </div>
                             <!-- primary email injected by contact.js -->
-                            <ul class="icon-list-items inline-items" id="contact-emails">
+                            <ul class="icon-list-items" id="contact-emails">
                                 <!-- <li class="icon-list-item inline-item">
                                     <span class="icon-list-icon"><i class="flaticon flaticon-mail"></i></span>
                                     <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">dg@be-mila.dz</span>
                                 </li> -->
                             </ul>
                             <!-- primary phone injected by contact.js -->
-                            <ul class="icon-list-items inline-items" id="contact-phones">
+                            <ul class="icon-list-items" id="contact-phones">
                                 <!-- <li class="icon-list-item inline-item">
                                     <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
                                     <span class="icon-list-text ltr-always">031 46 57 09</span>
