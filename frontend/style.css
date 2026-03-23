@@ -6135,3 +6135,19 @@ body.rtl .congat_menu ul.sub-menu:first-child > li {
     margin-left: 8px !important; 
     margin-right: 0 !important;
 }
+
+/* qualities cards — text always follows page direction */
+body.rtl .qualities_act .txbdsvtitle,
+body.rtl .qualities_act .txbdcon,
+body.rtl .qualities_act .txbdsva {
+    direction: rtl !important;
+    text-align: center !important;  /* center is fine for cards */
+}
+
+/* keep the carousel track itself LTR */
+body.rtl .qualities_act,
+body.rtl .qualities_act .slick-list,
+body.rtl .qualities_act .slick-track,
+body.rtl .qualities_act .slick-slide {
+    direction: ltr !important;
+}

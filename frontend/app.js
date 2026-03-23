@@ -76,7 +76,7 @@ async function loadCompany() {
 }
 
 // ─── QUALITIES ───────────────────────────────────────────────────
-
+/*
 function renderQualities(qualities) {
     const container = document.getElementById("qualities-cards");
     if (!container) return;
@@ -130,6 +130,7 @@ function renderQualities(qualities) {
             slidesToScroll: 1,
             arrows: true,
             dots: false,
+            rtl:  false,
             responsive: [
                 {
                     breakpoint: 1200,
@@ -143,6 +144,71 @@ function renderQualities(qualities) {
                     breakpoint: 767,
                     settings: { slidesToShow: 1, slidesToScroll: 1 }
                 }
+            ]
+        });
+    }, 100);
+}*/
+
+function renderQualities(qualities) {
+    const container = document.getElementById("qualities-cards");
+    if (!container) return;
+
+    const icons = [
+        "flaticon-file", "flaticon-book", "flaticon-shield",
+        "flaticon-pen",  "flaticon-plane","flaticon-fingerprint"
+    ];
+    const numbers = ["01","02","03","04","05","06","07","08","09","10"];
+
+    const $carousel = $(container);
+    if ($carousel.hasClass("slick-initialized")) {
+        $carousel.slick("unslick");
+    }
+
+    // in Arabic reverse the array so 01 appears on the right
+    const displayQualities = getLang() === "ar"
+        ? [...qualities].reverse()
+        : qualities;
+
+    container.innerHTML = displayQualities.slice(0, 6).map((q, i) => {
+        const originalIndex = getLang() === "ar"
+            ? qualities.length - 1 - i
+            : i;
+
+        const iconEl = q.icon?.image_url
+            ? `<img src="${q.icon.image_url}" alt="${field(q,'name')}"
+                    style="height:50px;object-fit:contain;">`
+            : `<i class="flaticon ${icons[originalIndex % icons.length]}"></i>`;
+
+        return `
+        <div>
+            <div class="txbdsva allcostyle boxsh boxpsv text-center sselect"
+                 style="margin: 0 10px;">
+                <span class="thbdspanposi">${numbers[originalIndex] || String(originalIndex+1).padStart(2,'0')}</span>
+                <div class="txbdsi">
+                    <div class="txbdicon iconalltf iconall iconallactive">${iconEl}</div>
+                    <div class="txbdcon">
+                        <h2 class="txbdsvtitle txstcolor hlight">${field(q, "name")}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    }).join("");
+
+    const total = qualities.length;
+
+    setTimeout(() => {
+        $carousel.slick({
+            infinite:      false,
+            autoplay:      false,
+            rtl:           false,          // ← always false, order handled above
+            slidesToShow:  Math.min(total, 3),
+            slidesToScroll:1,
+            arrows:        true,
+            dots:          false,
+            responsive: [
+                { breakpoint: 1200, settings: { slidesToShow: Math.min(total, 3), slidesToScroll: 1 } },
+                { breakpoint: 992,  settings: { slidesToShow: Math.min(total, 2), slidesToScroll: 1 } },
+                { breakpoint: 767,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
             ]
         });
     }, 100);
@@ -524,3 +590,20 @@ if (contactForm) {
         }
     });
 }
+
+setTimeout(() => {
+    const isRTL = getLang() === "ar";
+    $carousel.slick({
+        infinite:      false,
+        autoplay:      false,
+        slidesToShow:  Math.min(total, 3),
+        slidesToScroll:1,
+        arrows:        true,
+        dots:          false,
+        responsive: [
+            { breakpoint: 1200, settings: { slidesToShow: Math.min(total, 3), slidesToScroll: 1 } },
+            { breakpoint: 992,  settings: { slidesToShow: Math.min(total, 2), slidesToScroll: 1 } },
+            { breakpoint: 767,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
+        ]
+    });
+}, 100);
