@@ -6059,3 +6059,79 @@ body.rtl .icon-list-text [style*="direction: ltr"] {
     display: flex;
     align-items: center;
 }
+
+
+/* ── RTL HEADER FIX ─────────────────────────────────────────── */
+body.rtl .row.logo-left {
+    flex-direction: row-reverse !important;
+}
+
+body.rtl .congat_menu ul.sub-menu {
+    text-align: right !important;
+}
+
+/* nav items align right */
+body.rtl nav.congat_menu {
+    text-align: right !important;
+    float: right !important;
+    width: 100% !important;
+}
+
+/* sub-menu dropdown appears on the correct side */
+body.rtl .congat_menu .sub-menu .sub-menu {
+    left: auto !important;
+    right: 0 !important;
+}
+
+/* logo stays on the right in RTL */
+body.rtl .logo {
+    float: left !important;
+    text-align: left !important;
+}
+
+/* the nav column floats correctly */
+body.rtl .col-md-9 {
+    float: left !important;
+}
+
+body.rtl .col-md-3 {
+    float: right !important;
+}
+
+/* ── RTL HEADER — nav items flush to the right ─────────────── */
+body.rtl .col-md-9 {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+body.rtl .col-md-9 nav.congat_menu {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+}
+
+body.rtl .congat_menu ul.sub-menu:first-child {
+    display: flex !important;
+    align-items: center !important;
+    margin-right: 0 !important;
+    margin-left: auto !important;
+    padding: 0 !important;
+}
+
+body.rtl .congat_menu ul.sub-menu:first-child > li {
+    float: none !important;
+}
+
+/* dropdown */
+body.rtl .congat_menu .menu-item-has-children > .sub-menu {
+    left:      auto !important;
+    right:     0 !important;
+    text-align: right !important;
+}
+
+body.rtl .congat_menu ul.sub-menu:first-child > li {
+    float: none !important;
+    margin-left: 8px !important; 
+    margin-right: 0 !important;
+}
