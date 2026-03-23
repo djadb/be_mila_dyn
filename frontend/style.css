@@ -6034,3 +6034,28 @@ body.rtl .slick-slide .txbdsva {
     direction: rtl !important;
     text-align: right !important;
 }
+
+
+
+
+
+body.rtl .icon-list-icon {
+    margin-left: -6px !important;
+    margin-right: 10px !important;
+}
+
+/* ltr-always elements inside RTL list — keep them left-aligned */
+body.rtl .icon-list-text.ltr-always,
+body.rtl .icon-list-text [style*="direction:ltr"],
+body.rtl .icon-list-text [style*="direction: ltr"] {
+    direction: ltr !important;
+    unicode-bidi: embed !important;
+    text-align: left !important;
+    display: inline-block !important;
+}
+
+/* footer list items need flex to work properly */
+.icon-list-item {
+    display: flex;
+    align-items: center;
+}

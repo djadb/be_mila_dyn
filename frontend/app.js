@@ -448,7 +448,7 @@ function renderFooterContact(company) {
         phonesEl.innerHTML = company.phones.map(p =>
             `<li class="icon-list-item">
                 <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
-                <span class="icon-list-text" style="direction:ltr;unicode-bidi:embed;">${p.phone_number}</span>
+                <span class="icon-list-text ltr-always" style="direction:ltr;unicode-bidi:embed;">${p.phone_number}</span>
             </li>`
         ).join("");
     }
@@ -465,7 +465,7 @@ function renderFooterContact(company) {
         addressEl.innerHTML = `
             <li class="icon-list-item">
                 <span class="icon-list-icon"><i class="ti ti-map-alt"></i></span>
-                <span class="icon-list-text">${parts.join(", ")}</span>
+                <span class="icon-list-text ltr-always">${parts.join(", ")}</span>
             </li>`;
     }
 
