@@ -30,7 +30,7 @@ Object.keys(TRANSLATIONS).forEach(lang => {
 });
 
 // ─── STATE ────────────────────────────────────────────────────────
-const PAGE_SIZE   = 60;
+const PAGE_SIZE   = SITE_CONFIG.projects_per_page || 60;
 let allProjects   = [];
 let statuses      = [];
 let currentFilter = "*";
@@ -40,11 +40,24 @@ let currentPage   = 1;
 document.addEventListener("DOMContentLoaded", async () => {
     applyLang();
     applyTranslations();
+    applyBreadcrumb();        
     await loadProjectsAndStatuses();
     loadPartners();
 });
-
+function applyBreadcrumb() {
+    const el = document.querySelector(".breadcumb-area");
+    if (el) {
+        const img = SITE_CONFIG.breadcrumbs.projects;
+        if (img) {
+            el.style.backgroundImage    = `url(${img})`;
+            el.style.backgroundSize     = "cover";
+            el.style.backgroundPosition = "center";
+        }
+    }
+}
 // ─── LANGUAGE ─────────────────────────────────────────────────────
+
+
 
 function applyLang() {
     const lang  = getLang();

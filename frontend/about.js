@@ -227,42 +227,13 @@ function renderQualities(qualities) {
     }, 100);
 }
 
-// ─── DOMAINS  ──────
 function renderDomains(domains) {
-    const container = document.getElementById("domains-container");
-    if (!container || !domains.length) return;
+    const list = document.getElementById("domains-list");
+    if (!list || !domains.length) return;
 
-    const fallbackIcons = [
-        "flaticon-pen", "flaticon-book", "flaticon-shield",
-        "flaticon-plane", "flaticon-fingerprint", "flaticon-cloud-computing-1",
-        "flaticon-file", "flaticon-phone-call"
-    ];
-
-    container.innerHTML = domains.map((d, i) => {
+    list.innerHTML = domains.map(d => {
         const name = field(d, "name");
-        const desc = field(d, "description");
-        const iconEl = d.icon?.image_url
-            ? `<img src="${d.icon.image_url}" alt="${name}"
-                    style="height:50px;object-fit:contain;">`
-            : `<i class="flaticon ${fallbackIcons[i % fallbackIcons.length]}"></i>`;
-
-        return `
-        <div class="col-lg-4 col-md-6">
-            <div class="txbdsva allcostyle boxsh boxpsv text-center txbdbfall txbdbfltrb100 txbdboxallhover opacitybfh1">
-                <div class="txbdsi">
-                    <div class="txbdicon iconalltf iconall iconallactive">${iconEl}</div>
-                    <div class="txbdcon">
-                        <h2 class="txbdsvtitle txstcolor hlight">${name}</h2>
-                        ${desc ? `<p>${desc}</p>` : ""}
-                        <div class="txbdsvbtn txbdbtnicon">
-                            <a class="btnallt btnall" href="contact.html">
-                                ${t("read_more")} <i class="ti ti-angle-double-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+        return `<li><a href="#">${name}</a></li>`;
     }).join("");
 }
 

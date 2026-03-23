@@ -1,11 +1,21 @@
-// ─── API ─────────────────────────────────────────────────────────
+// ─── Constants ────────────────────────────────────────────────────
 const API_BASE = "http://127.0.0.1:8000/api";
+const SITE_CONFIG = {
+    logo:             "assets/images/logo1.png",
+    logo_white:       "assets/images/logo2.png",
+    breadcrumbs: {
+        projects: "assets/images/project_2000x1121.png",
+        contact:  "assets/images/slider3.jpg",
+        about:    "assets/images/about_2000x1121.png",
+    },
+    projects_per_page: 60,
+};
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
 const TRANSLATIONS = {
     en: {
         // nav
-        home: "Home", about: "About", projects: "Project", contact: "Contact", language: "Language",
+        home: "Home", about: "About", projects: "Projects", contact: "Contact", language: "Language",
         // hero
         hero_sub: "REALISE YOUR PROJECTS WITH OUR EXPERTISE",
         hero_title: "We build <span>great</span><br> structures.",
