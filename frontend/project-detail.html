@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>BE-MILA – Project Detail</title>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <link rel="icon" type="image/png" href="assets/images/favicon.png">
+        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="venobox/venobox.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/plugin_theme_css.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+        <style>
+            /* ── RTL ───────────────────────────────────────────── */
+            body.rtl { direction: rtl; text-align: right; }
+            body.rtl .slick-slider,
+            body.rtl .slick-list,
+            body.rtl .slick-track,
+            body.rtl .slick-slide { direction: ltr !important; }
+            body.rtl .row.logo-left { flex-direction: row-reverse; }
+            body.rtl .logo { float: right; }
+            body.rtl .congat_menu ul.sub-menu { text-align: right; }
+            body.rtl .tx_right_otherx { margin-right: auto; margin-left: 0; float: left; }
+            body.rtl .donate-btn-header { float: left !important; }
+            body.rtl .tts.text-left { text-align: right !important; }
+            body.rtl .social-icons a { margin-left: 10px; margin-right: 0; }
+            .ltr-always { direction: ltr !important; unicode-bidi: embed !important; display: inline-block !important; }
+            .ltr-item { flex-direction: row !important; }
+
+            /* ── Lang switcher ──────────────────────────────────── */
+            .lang-link { text-decoration:none; padding:2px 7px; font-weight:700; opacity:.55; transition:opacity .2s; }
+            .lang-link.active, .lang-link:hover { opacity:1; }
+
+            /* ── Project detail layout ──────────────────────────── */
+            .proj-detail-section { padding: 60px 0; }
+
+            /* main image wrap */
+            .proj-main-wrap { position: relative; border-radius: 4px; overflow: hidden; }
+
+            /* prev/next arrows on main image */
+            .detail-img-nav {
+                position: absolute; top: 50%; transform: translateY(-50%);
+                background: rgba(0,0,0,.55); color: #fff; border: none;
+                width: 44px; height: 44px; border-radius: 50%;
+                font-size: 24px; line-height: 44px; text-align: center;
+                cursor: pointer; z-index: 10; transition: background .2s;
+            }
+            .detail-img-nav:hover { background: #F45B1E; }
+            .detail-prev { left: 12px; }
+            .detail-next { right: 12px; }
+
+            /* image counter */
+            .detail-img-counter {
+                position: absolute; bottom: 12px; right: 12px;
+                background: rgba(0,0,0,.6); color: #fff;
+                padding: 3px 10px; border-radius: 20px;
+                font-size: 13px; font-weight: 600;
+            }
+            body.rtl .detail-img-counter { right: auto; left: 12px; }
+            body.rtl .detail-prev { left: auto; right: 12px; }
+            body.rtl .detail-next { right: auto; left: 12px; }
+
+            /* thumbnail strip */
+            .proj-thumbnails {
+                display: flex; gap: 8px; margin-top: 10px;
+                overflow-x: auto; padding-bottom: 4px;
+            }
+            .proj-thumbnails::-webkit-scrollbar { height: 4px; }
+            .proj-thumbnails::-webkit-scrollbar-thumb { background: #F45B1E; border-radius: 2px; }
+            .proj-thumb {
+                flex-shrink: 0;
+                width: 80px; height: 60px;
+                background-size: cover; background-position: center;
+                border-radius: 3px; cursor: pointer;
+                border: 3px solid transparent;
+                transition: border-color .2s, opacity .2s;
+                opacity: .65;
+            }
+            .proj-thumb.active,
+            .proj-thumb:hover { border-color: #F45B1E; opacity: 1; }
+
+            /* info panel */
+            .proj-detail-info { padding: 0 0 0 20px; }
+            body.rtl .proj-detail-info { padding: 0 20px 0 0; }
+
+            .proj-detail-title {
+                font-size: 28px; font-weight: 800;
+                margin-bottom: 16px; line-height: 1.3;
+                color: #222;
+            }
+
+            /* status badge */
+            .proj-detail-status {
+                display: inline-block;
+                padding: 5px 18px; border-radius: 30px;
+                color: #fff; font-weight: 700; font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            /* meta rows */
+            .proj-detail-meta { margin-bottom: 24px; }
+            .proj-meta-row {
+                display: flex; align-items: baseline;
+                gap: 10px; padding: 8px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            body.rtl .proj-meta-row { flex-direction: row-reverse; }
+            .proj-meta-label {
+                font-weight: 700; color: #555;
+                font-size: 13px; min-width: 130px; flex-shrink: 0;
+            }
+            .proj-meta-value { color: #333; font-size: 14px; }
+
+            /* description */
+            .proj-detail-desc {
+                margin-top: 10px;
+                line-height: 1.8; color: #444;
+            }
+
+            /* tinymce content */
+            .tinymce-content p          { margin-bottom: 6px !important; line-height: 1.7 !important; }
+            .tinymce-content p:last-child { margin-bottom: 0 !important; }
+            .tinymce-content h2,
+            .tinymce-content h3         { font-weight: 700; margin: 14px 0 6px; }
+            .tinymce-content ul,
+            .tinymce-content ol         { padding-left: 22px !important; margin-bottom: 10px !important; list-style: revert !important; }
+            .tinymce-content li         { display: list-item !important; margin-bottom: 4px !important; }
+            body.rtl .tinymce-content ul,
+            body.rtl .tinymce-content ol { padding-left: 0 !important; padding-right: 22px !important; }
+
+            /* loading / error */
+            .proj-loading, .proj-empty {
+                text-align: center; padding: 80px 20px;
+                color: #aaa; font-size: 16px; width: 100%;
+            }
+        </style>
+        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+
+    <!-- ══ HEADER ═══════════════════════════════════════════════════ -->
+    <div class="em40_header_area_main">
+        <div class="tx_top2_relative">
+            <div class="congat-main-menu one_page menu4 heading_style_4 witr_h_h6">
+                <div class="congat_nav_area transprent-menu scroll_fixed bdbar">
+                    <div class="container-fluid">
+                        <div class="row logo-left">
+                            <div class="col-md-3 col-sm-3 col-xs-4">
+                                <div class="logo">
+                                    <a class="main_sticky_main_l" href="index.html"><img src="assets/images/logo1.png" alt="BE-MILA"></a>
+                                    <a class="main_sticky_l"      href="index.html"><img src="assets/images/logo1.png" alt="BE-MILA"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-8">
+                                <nav class="congat_menu nologo_menu13 main-search-menu">
+                                    <ul class="sub-menu">
+                                        <li class="menu-item-has-children">
+                                            <a href="#" data-t="home">Home</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="index.html" data-t="home">Home</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html"   data-t="about">About</a></li>
+                                        <li><a href="project.html" data-t="projects">Project</a></li>
+                                        <li><a href="contact.html" data-t="contact">Contact</a></li>
+                                        <li class="menu-item-has-children">
+                                            <a href="#" data-t="language">Language</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#" onclick="setLang('fr');return false;">Français</a></li>
+                                                <li><a href="#" onclick="setLang('en');return false;">English</a></li>
+                                                <li><a href="#" onclick="setLang('ar');return false;">العربية</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ MOBILE MENU ══════════════════════════════════════════════ -->
+    <div class="mobile_logo_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="mobilemenu_con">
+                        <div class="mobile_menu_logo text-center">
+                            <a href="index.html"><img src="assets/images/logo2.png" alt="BE-MILA"></a>
+                        </div>
+                        <div class="mobile_menu_option">
+                            <div class="mobile_menu_o mobile_opicon">
+                                <i class="icofont-navigation-menu openclass"></i>
+                            </div>
+                            <div class="mobile_menu_inner mobile_p">
+                                <div class="mobile_menu_content">
+                                    <div class="mobile_menu_logo text-center">
+                                        <a href="index.html"><img src="assets/images/logo2.png" alt="BE-MILA"></a>
+                                    </div>
+                                    <div class="menu_area mobile-menu">
+                                        <nav class="congat_menu">
+                                            <ul class="sub-menu">
+                                                <li><a href="index.html"   data-t="home">Home</a></li>
+                                                <li><a href="about.html"   data-t="about">About</a></li>
+                                                <li><a href="project.html" data-t="projects">Project</a></li>
+                                                <li><a href="contact.html" data-t="contact">Contact</a></li>
+                                                <li class="menu-item-has-children">
+                                                    <a href="#" data-t="language">Language</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="#" onclick="setLang('fr');return false;">Français</a></li>
+                                                        <li><a href="#" onclick="setLang('en');return false;">English</a></li>
+                                                        <li><a href="#" onclick="setLang('ar');return false;">العربية</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="mobile_menu_o mobile_cicon">
+                                        <i class="icofont-close closeclass"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mobile_overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ BREADCRUMB ═══════════════════════════════════════════════ -->
+    <div class="breadcumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 txtc text-center ccase">
+                    <div class="brpt brptsize">
+                        <h1 class="brcrumb_title" data-t="project_detail">Project Detail</h1>
+                    </div>
+                    <div class="breadcumb-inner">
+                        <ul>
+                            <li><a href="index.html" data-t="home">Home</a></li>
+                            <li> - <a href="project.html" data-t="projects">Projects</a></li>
+                            <li> - <span class="current" data-t="project_detail">Detail</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ PROJECT DETAIL ═══════════════════════════════════════════ -->
+    <div class="proj-detail-section">
+        <div id="project-detail-content">
+            <div class="proj-loading" data-t="loading">Loading...</div>
+        </div>
+    </div>
+
+    <!-- ══ BRAND / PARTNERS ═════════════════════════════════════════ -->
+    <div class="cg_brand_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="txbdicarosel allcostyle">
+                        <div class="witr_carousel_main row brand_active" id="partners-container">
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br01.png" alt=""></a></div>
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br02.png" alt=""></a></div>
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br03.png" alt=""></a></div>
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br04.png" alt=""></a></div>
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br05.png" alt=""></a></div>
+                            <div class="slide_items"><a class="txbdbfoverlay" href="#"><img src="assets/images/br06.png" alt=""></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ FOOTER ═══════════════════════════════════════════════════ -->
+    <div class="witrfm_area">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="congat_theme_widget congat_f_color col-sm-12 col-md-6 col-lg-5">
+                        <figure class="image-box-img">
+                            <img src="assets/images/logo1.png" alt="BE-MILA">
+                        </figure>
+                        <p data-t="footer_desc">Our ability to self perform site work, concrete work and more.</p>
+                        <div class="witr_button_area">
+                            <div class="witr_btn_style mr">
+                                <div class="witr_btn_sinner">
+                                    <a href="contact.html" class="witr_btn">
+                                        <span data-t="join_team">JOIN THE TEAM</span>
+                                        <div class="pluse_btn_icon"><span class="ti-angle-double-right"></span></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="social-icons">
+                            <a href="#"><i class="ti-facebook"></i></a>
+                            <a href="#"><i class="fa fa-x-twitter"></i></a>
+                            <a href="#"><i class="icofont-youtube-play"></i></a>
+                        </div>
+                    </div>
+                    <div class="congat_theme_widget congat_f_color col-sm-12 col-md-6 col-lg-7">
+                        <div class="widget widget_nav_menu cg_fot_mrlt">
+                            <h2 class="heading-title" data-t="our_service">Our Service</h2>
+                            <ul class="icon-list-items inline-items" id="footer-emails">
+                                <li class="icon-list-item inline-item ltr-item">
+                                    <span class="icon-list-icon"><i class="flaticon flaticon-mail"></i></span>
+                                    <span class="icon-list-text ltr-always">dg@be-mila.dz</span>
+                                </li>
+                            </ul>
+                            <ul class="icon-list-items inline-items" id="footer-phones" style="margin-top:8px;">
+                                <li class="icon-list-item inline-item ltr-item">
+                                    <span class="icon-list-icon"><i class="flaticon flaticon-phone-call"></i></span>
+                                    <span class="icon-list-text ltr-always">031 46 57 09</span>
+                                </li>
+                            </ul>
+                            <ul class="icon-list-items inline-items" id="footer-address" style="margin-top:8px;">
+                                <li class="icon-list-item inline-item">
+                                    <span class="icon-list-icon"><i class="ti ti-map-alt"></i></span>
+                                    <span class="icon-list-text">Cité Sénnaoua W.Mila.43000</span>
+                                </li>
+                            </ul>
+                            <div class="witr_button_area" style="margin-top:16px;">
+                                <div class="witr_btn_style mr">
+                                    <div class="witr_btn_sinner">
+                                        <a href="contact.html" class="witr_btn">
+                                            <span data-t="view_positions">View open positions</span>
+                                            <div class="pluse_btn_icon"><span class="ti-angle-double-right"></span></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══ SCRIPTS ══════════════════════════════════════════════════ -->
+    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="venobox/venobox.min.js"></script>
+    <script src="assets/js/jquery.appear.js"></script>
+    <script src="assets/js/jquery.knob.js"></script>
+    <script src="assets/js/theme-pluginjs.js"></script>
+    <script src="assets/js/jquery.meanmenu.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="config.js"></script>
+    <script src="project_detail.js"></script>
+    </body>
+</html>
