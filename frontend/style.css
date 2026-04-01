@@ -2829,6 +2829,7 @@ span.witr_cir_text {
 .witr_pslide_image {
     overflow: hidden;
     position: relative;
+    height: 450px;
 }
 .witr_pslide_image:before {
     position: absolute;
@@ -2842,12 +2843,18 @@ span.witr_cir_text {
     z-index: 1;
     opacity: 0.6;
 }
+
 .witr_pslide_image img {
+    width: 100%;
+    height: 100%;
+    transition: .5s;
     margin-right: auto;
     margin-left: auto;
-    transition: .5s;
-    width: 100%;
+    object-fit: cover;   
+    object-position: center;
+    display: block;
 }
+
 .witr_pslide_custom {
     position: absolute;
     top: 50px;
